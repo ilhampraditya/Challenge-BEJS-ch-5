@@ -1,0 +1,102 @@
+### registeruser
+POST http://localhost:3000/api/v1/users
+Content-Type: application/json
+
+{
+    "name": "mullet",
+    "email": "mullet@gmail.com",
+    "password": "mullet123",
+    "identity_type": "KTP",
+    "identity_number": "777777777",
+    "address": "Jalan mawar"
+}
+
+### getUser
+GET  http://localhost:3000/api/v1/users
+
+### getUserDetail
+GET  http://localhost:3000/api/v1/users/39
+
+### editUser
+PUT  http://localhost:3000/api/v1/users/1
+Content-Type: application/json
+
+{
+     "identity_type": "SIM",
+      "identity_number" : "999999"
+}
+
+### deleteUser
+DELETE http://localhost:3000/api/v1/users/1
+
+##################################################################################################
+
+### create account bank
+POST http://localhost:3000/api/v1/accounts
+Content-Type: application/json
+
+{
+    "bank_name":"MANDIRI",
+    "bank_account_number":"99999",
+    "balance":50000,
+    "user_id": 38
+}
+
+### get all bank account
+GET http://localhost:3000/api/v1/accounts
+
+### get detail bank account
+GET http://localhost:3000/api/v1/accounts/1
+
+### delete bank account
+DELETE  http://localhost:3000/api/v1/accounts/1
+
+
+###################################################
+
+### create transactions 
+POST http://localhost:3000/api/v1/transactions
+Content-Type: application/json
+
+{
+    "amount": 50,
+    "source_account_id": 2,
+    "destination_account_id": 3
+}
+
+### Get all Transaction
+GET http://localhost:3000/api/v1/transactions
+
+### Get detail Transaction
+GET http://localhost:3000/api/v1/transactions/6
+
+
+###################
+
+###AUTH
+
+### Register
+POST http://localhost:3000/api/v1/auth/register
+Content-Type: application/json
+
+{
+    "name": "bobon",
+    "email": "bobon@gmail.com",
+    "password": "password123",
+    "identity_type": "KTP",
+    "identity_number": "123456789",
+    "address": "Jalan pahlawan"
+}
+
+### login
+POST http://localhost:3000/api/v1/auth/login
+Content-Type: application/json
+
+{
+    "email": "bobon@gmail.com",
+    "password": "password123"
+}
+
+### login dengan token
+GET http://localhost:3000/api/v1/auth/authenticate
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MzMsIm5hbWUiOiJyaWtvIiwiZW1haWwiOiJyaWtvQGdtYWlsLmNvbSIsImlhdCI6MTcxMzU1MTA1M30._69W-0w97Cv65_FCkooKDV8Nn2XUI0v8thG4UEu8jZk
