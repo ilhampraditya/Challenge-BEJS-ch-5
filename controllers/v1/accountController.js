@@ -24,6 +24,19 @@ module.exports = {
                     data: null,
                 })
             }
+
+            const existingNumAccount = await prisma.bank_Account.findFirst({
+                where: { bank_account_number },
+            });
+
+            if (existingNumAccount) {
+                return res.status(401).json({
+                    status: false,
+                    message: "Bank account number already exists",
+                    data: null,
+                });
+            }
+
             const exist = await prisma.user.findUnique({
                 where: { id: user_id },
             })

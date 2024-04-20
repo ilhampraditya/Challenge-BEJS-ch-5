@@ -9,7 +9,7 @@
     "test:users": "jest tests/integration/users.spec.js",
     "test:accounts": "jest tests/integration/accounts.spec.js",
     "test:transactions": "jest tests/integration/transactions.spec.js",
-     "test:auth": "jest tests/integration/auth.spec.js"
+    "test:auth": "jest tests/integration/auth.spec.js"
   },
   "dependencies": {
     "@prisma/client": "^5.12.1",

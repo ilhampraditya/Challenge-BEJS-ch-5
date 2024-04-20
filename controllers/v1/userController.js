@@ -1,5 +1,6 @@
 const { PrismaClient } = require("@prisma/client")
 const prisma = new PrismaClient()
+const bcrypt = require("bcrypt");
 
 module.exports = {
     registerUser: async (req, res, next) => {
@@ -31,11 +32,12 @@ module.exports = {
                 })
             }
 
+            let encryptedPassword = await bcrypt.hash(password, 10);
             const user = await prisma.user.create({
                 data: {
                     name,
                     email,
-                    password,
+                    password: encryptedPassword,
                     profile: {
                         create: {
                             identity_type,
@@ -48,6 +50,7 @@ module.exports = {
                     profile: true,
                 },
             })
+            delete user.password;
 
             res.status(201).json({
                 status: true,
@@ -62,6 +65,9 @@ module.exports = {
     getUser: async (req, res, next) => {
         try {
             const user = await prisma.user.findMany()
+            user.forEach(user => {
+                delete user.password;
+            });
             res.status(200).json({
                 status: true,
                 message: "success",
@@ -89,7 +95,7 @@ module.exports = {
                     data: null,
                 })
             }
-
+            delete user.password;
             res.status(200).json({
                 status: true,
                 message: "success",
@@ -152,7 +158,8 @@ module.exports = {
                     profile: true,
                 },
             })
-
+            
+            delete user.password;
             res.status(200).json({
                 status: true,
                 message: "User updated successfully",
